@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, send_from_directory
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 app = Flask(__name__, static_folder='static')
@@ -28,6 +28,8 @@ events = [
 def get_time_remaining(event_date):
     now = datetime.now()
     event_dt = datetime.strptime(event_date, "%Y-%m-%d")
+    if event_dt < now:
+        event_dt = event_dt.replace(year=now.year + 1)  # Move past events to the next year
     time_diff = event_dt - now
 
     return {
@@ -43,9 +45,16 @@ def serve_index():
 
 @app.route('/events', methods=['GET'])
 def get_events():
-    sorted_events = sorted(events, key=lambda e: datetime.strptime(e["date"], "%Y-%m-%d"))
-    for event in sorted_events:
+    upcoming_events = []
+    for event in events:
+        event_date = datetime.strptime(event["date"], "%Y-%m-%d")
+        if event_date < datetime.now():
+            event_date = event_date.replace(year=datetime.now().year + 1)
+        event["date"] = event_date.strftime("%Y-%m-%d")  # Update event date if moved
         event["countdown"] = get_time_remaining(event["date"])
+        upcoming_events.append(event)
+    
+    sorted_events = sorted(upcoming_events, key=lambda e: datetime.strptime(e["date"], "%Y-%m-%d"))
     return jsonify(sorted_events)
 
 if __name__ == '__main__':

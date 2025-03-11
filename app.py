@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, send_from_directory
 from datetime import datetime
+import os
 
-app = Flask(__name__, static_folder="static", template_folder="templates")
+app = Flask(__name__, static_folder='static')
 
 events = [
     {"name": "Alfredo", "type": "Cumple", "date": "2025-11-28"},
@@ -36,10 +37,6 @@ def get_time_remaining(event_date):
         "seconds": time_diff.seconds % 60
     }
 
-@app.route('/')
-def home():
-    return render_template('index.html')
-
 @app.route('/events', methods=['GET'])
 def get_events():
     sorted_events = sorted(events, key=lambda e: datetime.strptime(e["date"], "%Y-%m-%d"))
@@ -47,5 +44,9 @@ def get_events():
         event["countdown"] = get_time_remaining(event["date"])
     return jsonify(sorted_events)
 
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=10000, debug=True)
+    app.run(host='0.0.0.0', port=10000)

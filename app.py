@@ -16,13 +16,21 @@ events = [
     {"name": "Daylen", "type": "Cumple", "date": "2025-01-14"},
     {"name": "Manuel", "type": "Cumple", "date": "2025-11-02"},
     {"name": "Alicia", "type": "Cumple", "date": "2025-06-29"},
-    {"name": "Abrahan", "type": "Cumple", "date": "2025-02-15"},
+    {"name": "Abraham", "type": "Cumple", "date": "2025-02-15"},
     {"name": "Daniela", "type": "Cumple", "date": "2025-04-04"},
     {"name": "Emma", "type": "Cumple", "date": "2025-11-11"},
     {"name": "Aaron", "type": "Cumple", "date": "2025-08-26"},
     {"name": "Luis Manuel", "type": "Cumple", "date": "2025-09-05"},
     {"name": "Anita", "type": "Cumple", "date": "2025-05-07"},
     {"name": "Karolina", "type": "Cumple", "date": "2025-04-01"},
+    {"name": "Yenier", "type": "Cumple", "date": "2025-04-11"},
+    {"name": "Thiago", "type": "Cumple", "date": "2025-06-16"},
+    {"name": "Karolina", "type": "Cumple", "date": "2025-10-16"},
+    {"name": "Luis y Daylen", "type": "Aniversario", "date": "2025-09-01"},
+    {"name": "Yenier y Anita", "type": "Aniversario", "date": "2025-09-01"},
+    {"name": "Alicia y Manuel", "type": "Aniversario", "date": "2025-09-01"},
+    {"name": "Abuela Aya", "type": "Cumple", "date": "2025-11-09"},
+    {"name": "Denisse", "type": "Cumple", "date": "2025-07-25"},
 ]
 
 def get_time_remaining(event_date):

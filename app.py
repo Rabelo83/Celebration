@@ -31,6 +31,7 @@ events = [
     {"name": "Alicia y Manuel", "type": "Aniversario", "date": "2025-09-01"},
     {"name": "Abuela Aya", "type": "Cumple", "date": "2025-11-09"},
     {"name": "Denisse", "type": "Cumple", "date": "2025-07-25"},
+    {"name": "Miguel", "type": "Cumple", "date": "2025-12-03"},
 ]
 
 def get_time_remaining(event_date):

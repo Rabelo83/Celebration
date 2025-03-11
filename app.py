@@ -1,7 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
 events = [
     {"name": "Alfredo", "type": "Cumple", "date": "2025-11-28"},
@@ -36,6 +36,10 @@ def get_time_remaining(event_date):
         "seconds": time_diff.seconds % 60
     }
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 @app.route('/events', methods=['GET'])
 def get_events():
     sorted_events = sorted(events, key=lambda e: datetime.strptime(e["date"], "%Y-%m-%d"))
@@ -44,4 +48,4 @@ def get_events():
     return jsonify(sorted_events)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000, debug=True)
